@@ -1,0 +1,15 @@
+.app{
+  background-color: red;
+}
+.todo-list{
+  background-color: blue;
+}
+.todo{
+  background-color: blueviolet;
+}
+.content{
+  background-color: green;
+}
+.category{
+  background-color: brown;
+}
