@@ -29,15 +29,17 @@ input{
   box-sizing: border-box;
 }
 
-.todo-list{
-  background-color: blue;
+button{
+  background-color: #333974;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  opacity: .8;
+  transition: .3s;
 }
-.todo{
-  background-color: blueviolet;
-}
-.content{
-  background-color: green;
-}
-.category{
-  background-color: brown;
+
+button:hover{
+  opacity: 1;
 }
