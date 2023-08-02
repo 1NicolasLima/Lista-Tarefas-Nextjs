@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import './TodoForm.css'
 
-function TodoForm(){
+const TodoForm = ({addTodo}) => {
 
     const [value, setValue] = useState("")
     const [category, setCategory] = useState("")
@@ -8,6 +9,7 @@ function TodoForm(){
     const handleSubmit = (e)=>{
         e.preventDefault();
         if(!value ||!category) return;
+        addTodo(value, category)
         setValue("");
         setCategory("")
     }
