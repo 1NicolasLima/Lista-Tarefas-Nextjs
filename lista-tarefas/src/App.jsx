@@ -2,6 +2,7 @@ import {useState} from "react";
 import './App.css';
 import Todo from "./components/Todo";
 import TodoForm from "./components/TodoForm";
+import Search from "./components/Search";
 
 function App() {
 
@@ -54,6 +55,7 @@ function App() {
   return (
     <div className="app">
       <h1>Lista de Tarefas</h1>
+      <Search></Search>
       <div className="todo-list">
         {todos.map((todo)=>(
          <Todo todo={todo} key={todo.id} removeTodo={removeTodo} completeTodo={completeTodo}/>
