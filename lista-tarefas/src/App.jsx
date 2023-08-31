@@ -7,59 +7,84 @@ import Filter from "./components/Filter";
 
 function App() {
 
-  const [todos, setTodos] = useState([
-    {
-      id:1,
-      text: "Criar funcionalidade X no sistema",
-      category: "Trabalho",
-      isCompleted: false,
-    },
-    {
-      id:2,
-      text: "Ir para a academia",
-      category: "Pessoal",
-      isCompleted: false,
-    },
-    {
-      id:3,
-      text: "Estudar React",
-      category: "Estudos",
-      isCompleted: false,
-    }
-  ]);
+  const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+  const [todos, setTodos] = useState(savedTodos);
+
+  // const [todos, setTodos] = useState([
+  //   {
+  //     id:1,
+  //     text: "Criar funcionalidade X no sistema",
+  //     category: "Trabalho",
+  //     isCompleted: false,
+  //   },
+  //   {
+  //     id:2,
+  //     text: "Ir para a academia",
+  //     category: "Pessoal",
+  //     isCompleted: false,
+  //   },
+  //   {
+  //     id:3,
+  //     text: "Estudar React",
+  //     category: "Estudos",
+  //     isCompleted: false,
+  //   }
+  // ]);
 
   const [search, setSearch] = useState("");
 
   const [filter, setFilter] = useState("All");
   const [sort, setSort] = useState("Asc");
+
+  const addTodo = (text, category) => {
+    const newTodos = [...todos, { id: Math.floor(Math.random() * 10000), text, category, isCompleted: false }];
+    setTodos(newTodos);
+    localStorage.setItem('todos', JSON.stringify(newTodos));
+  };
   
   
-  const addTodo = (text, category)=>{
-    const newTodos = [...todos,{
-      id: Math.floor(Math.random()*10000),
-      text,
-      category,
-      isCompleted: false,
-    },
-  ];
-  setTodos(newTodos)
-  };
+  // const addTodo = (text, category)=>{
+  //   const newTodos = [...todos,{
+  //     id: Math.floor(Math.random()*10000),
+  //     text,
+  //     category,
+  //     isCompleted: false,
+  //   },
+  // ];
+  // setTodos(newTodos)
+  // };
 
-  const removeTodo = (id) =>{
-    const newTodos = [...todos]
-    const filteredTodos = newTodos.filter((todo) =>
-     todo.id !== id ? todo : null
-     );
-    setTodos(filteredTodos)
+  const removeTodo = (id) => {
+    const newTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(newTodos);
+    localStorage.setItem('todos', JSON.stringify(newTodos));
   };
-
-  //sugestao do chatgpt
+  
   const completeTodo = (id) => {
     const newTodos = todos.map((todo) =>
       todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
     );
     setTodos(newTodos);
+    localStorage.setItem('todos', JSON.stringify(newTodos));
   };
+  
+  
+
+  // const removeTodo = (id) =>{
+  //   const newTodos = [...todos]
+  //   const filteredTodos = newTodos.filter((todo) =>
+  //    todo.id !== id ? todo : null
+  //    );
+  //   setTodos(filteredTodos)
+  // };
+
+  //sugestao do chatgpt
+  // const completeTodo = (id) => {
+  //   const newTodos = todos.map((todo) =>
+  //     todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+  //   );
+  //   setTodos(newTodos);
+  // };
 
   return (
     <div className="app">
