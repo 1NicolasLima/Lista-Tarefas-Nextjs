@@ -28,7 +28,11 @@ function App() {
     }
   ]);
 
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
+
+  const [filter, setFilter] = useState("All");
+  // const [sort, setSort] = useState("Asc");
+  
   
   const addTodo = (text, category)=>{
     const newTodos = [...todos,{
@@ -49,19 +53,29 @@ function App() {
     setTodos(filteredTodos)
   };
 
+  //sugestao do chatgpt
   const completeTodo = (id) => {
-    const newTodos = [...todos]
-    newTodos.map((todo)=>todo.id === id ? todo.isCompleted = !todo.isCompleted : todo);
+    const newTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+    );
     setTodos(newTodos);
-  }
+  };
 
   return (
     <div className="app">
       <h1>Lista de Tarefas</h1>
       <Search search={search} setSearch={setSearch}></Search>
-      <Filter></Filter>
+      <Filter filter={filter} setFilter={setFilter}></Filter>
       <div className="todo-list">
-        {todos.filter((todo)=>
+        {todos
+        .filter((todo) =>
+         filter === "All" 
+          ? true 
+          : filter === "Completed"
+          ? todo.isCompleted 
+          : !todo.isCompleted
+        )
+        .filter((todo)=>
         todo.text.toLowerCase().includes(search.toLowerCase())
         ).map((todo)=>(
          <Todo todo={todo} key={todo.id} removeTodo={removeTodo} completeTodo={completeTodo}/>
