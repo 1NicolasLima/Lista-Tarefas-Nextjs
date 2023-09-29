@@ -5,6 +5,10 @@ import TodoForm from "./components/TodoForm";
 import Search from "./components/Search";
 import Filter from "./components/Filter";
 
+import Login from './components/Login'
+import Logout from "./components/Logout";
+import Registro from "./components/Registro";
+
 function App() {
 
   const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
@@ -112,6 +116,11 @@ function App() {
         ))}
       </div>
       <TodoForm addTodo={addTodo}/>
+      <div>
+        <Login></Login>
+        <Logout></Logout>
+        <Registro></Registro>
+      </div>
     </div>
   );
 }
